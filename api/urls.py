@@ -1,6 +1,7 @@
-from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+from rest_framework.urlpatterns import format_suffix_patterns
+
 from api import views
 
 # Create a router and register the viewsets with it.

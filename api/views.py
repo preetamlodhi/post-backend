@@ -1,19 +1,15 @@
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework import permissions
-from rest_framework import viewsets
-from rest_framework.response import Response
-from api.models import Post, User
-from api.serializers import (
-    PostSerializer,
-    UserSerializer,
-    UserRegistrationSerializer,
-    UserLoginSerializer,
-)
-from api.permissions import IsOwnerOrReadOnly
 from django.contrib.auth import authenticate
+from rest_framework import permissions, status, viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+
+from api.models import Post, User
+from api.permissions import IsOwnerOrReadOnly
 from api.renderers import UserRenderer
+from api.serializers import (PostSerializer, UserLoginSerializer,
+                             UserRegistrationSerializer, UserSerializer)
+
 
 # Generate Token Manually
 def get_tokens_for_user(user):
