@@ -28,5 +28,5 @@ Project for the api App to enable User registration, User login and Post creatio
     - `python manage.py migrate`
 1. Run the test server
     - `python3 manage.py runserver`
-1. The File `api.postman_collection.json`` has Postman Collection  which can be imported in postman to test the apis.
+1. The File `api.postman_collection.json` has Postman Collection  which can be imported in postman to test the apis.
 
