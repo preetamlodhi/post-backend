@@ -8,7 +8,7 @@ class UserManager(BaseUserManager):
         Creates and saves a User with the given email, name and password.
         """
         if not email:
-            raise ValueError('User must have an email address')
+            raise ValueError("User must have an email address")
 
         user = self.model(
             email=self.normalize_email(email),
@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(
-        verbose_name='Email',
+        verbose_name="Email",
         max_length=100,
         unique=True,
     )
@@ -47,8 +47,8 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["name"]
 
     def __str__(self):
         return self.email
@@ -70,7 +70,7 @@ class Post(models.Model):
     content = models.CharField(max_length=500)
     post_date = models.DateField()
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user = models.ForeignKey('api.User', related_name="posts", on_delete=models.CASCADE)
+    user = models.ForeignKey("api.User", related_name="posts", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
