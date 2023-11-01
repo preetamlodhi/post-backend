@@ -68,12 +68,11 @@ class User(AbstractBaseUser):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
-    post_date = models.DateField()
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    posted_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey("api.User", related_name="posts", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ["post_date"]
+        ordering = ["posted_at"]
