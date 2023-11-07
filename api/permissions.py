@@ -13,3 +13,12 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
         # Allowing write permissions to the owner of the post.
         return obj.user == request.user
+
+
+class IsABCUser(permissions.BasePermission):
+    """
+    Custom permission to only allow ABCUsers to view latest users
+    """
+
+    def has_permission(self, request, view):
+        return request.user.is_abc

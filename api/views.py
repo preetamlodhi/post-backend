@@ -4,8 +4,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from django.utils import timezone
+from datetime import timedelta
 from api.models import Post, User
-from api.permissions import IsOwnerOrReadOnly
+from api.permissions import IsOwnerOrReadOnly, IsABCUser
 from api.renderers import UserRenderer
 from api.serializers import (
     PostSerializer,
@@ -85,3 +87,11 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class LatestUserView(APIView):
+    permission_classes = [IsABCUser, permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        queryset = User.objects.filter(created_at__gte=timezone.now()-timedelta(days=1))
+        serializer = UserSerializer(queryset, many=True, context={'request': request})
+        return Response(serializer.data)
